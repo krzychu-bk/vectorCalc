@@ -67,19 +67,27 @@ vector_t* vSelect(vector_t vArray[VNUM]) {
 
 vector_t* vCompute(vector_t vArray[VNUM],char op) {
 	vector_t* opers = vSelect(vArray);
-	if (opers[1].dim != opers[2].dim) {
-		cerr << "ERROR: IMPROPER OPERANDS" << endl;
-		exit(0);
-	}
 	for (int j = 0; j < opers[0].dim; j++) {
 		if (op == '+') {
+			if (opers[1].dim != opers[2].dim) {
+				cerr << "ERROR: IMPROPER OPERANDS" << endl;
+				exit(0);
+			}
 			opers[0].value[j] = (opers[1].value[j]) + (opers[2].value[j]);
 		}
 		else if (op == '-') {
+			if (opers[1].dim != opers[2].dim) {
+				cerr << "ERROR: IMPROPER OPERANDS" << endl;
+				exit(0);
+			}
 			opers[0].value[j] = (opers[1].value[j]) - (opers[2].value[j]);
 		}
 		else if (op == '*') {
-			if (opers[1].dim== opers[2].dim) {
+			if (opers[1].dim != opers[2].dim && (opers[1].dim!=1 && opers[2].dim!=1)) {
+				cerr << "ERROR: IMPROPER OPERANDS" << endl;
+				exit(0);
+			}
+			if (opers[1].dim == opers[2].dim) {
 				opers[0].value[j] = (opers[1].value[j]) * (opers[2].value[j]);
 			}
 			else {
